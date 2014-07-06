@@ -3,36 +3,25 @@
 Turn "John 3:16" into:
 
 ```ruby
-{
-  book: 'John',
-  refs: {
-    chapter: 3,
-    verse: 16,
-  }
-}
+[
+  [{ book: 'JHN', chapter: 3, verse: 16 },
+   { book: 'JHN', chapter: 3, verse: 16 }]
+]
 ```
 
-...and turn "Romans 12:1-2,4,13:7-8" into:
+...and turn "Romans 12:1,3-4 & 13:2-4,7-8" into:
 
 ```ruby
-{
-  book: 'Romans',
-  refs: [
-    {
-      range: {
-        from: { chapter: 12, verse: 1 },
-        to:   {              verse: 2 }
-      }
-    },
-    { verse: 4 },
-    {
-      range: {
-        from: { chapter: 13, verse: 7 },
-        to:   {              verse: 8 }
-      }
-    }
-  ]
-}
+[
+  [{ book: 'ROM', chapter: 12, verse: 1 },
+   { book: 'ROM', chapter: 12, verse: 1 }],
+  [{ book: 'ROM', chapter: 12, verse: 3 },
+   { book: 'ROM', chapter: 12, verse: 4 }],
+  [{ book: 'ROM', chapter: 13, verse: 2 },
+   { book: 'ROM', chapter: 13, verse: 4 }],
+  [{ book: 'ROM', chapter: 13, verse: 7 },
+   { book: 'ROM', chapter: 13, verse: 8 }]
+]
 ```
 
 ## Copyright
