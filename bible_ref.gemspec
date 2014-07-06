@@ -1,4 +1,4 @@
-require_relative 'lib/bible_ref'
+require_relative 'lib/bible_ref/version'
 
 Gem::Specification.new do |s|
   s.name         = "bible_ref"
