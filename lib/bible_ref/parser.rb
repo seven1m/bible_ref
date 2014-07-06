@@ -1,6 +1,6 @@
 require 'parslet'
 
-module BibleApi
+module BibleRef
   class Parser < Parslet::Parser
     rule(:refs) do
       (

@@ -1,7 +1,7 @@
 require_relative './book'
 require_relative './parser'
 
-module BibleApi
+module BibleRef
   class Reference
 
     attr_reader :book

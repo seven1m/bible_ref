@@ -1,8 +1,8 @@
-require_relative '../../lib/bible_api/parser'
+require_relative '../../lib/bible_ref/parser'
 
-describe BibleApi::Parser do
+describe BibleRef::Parser do
 
-  let(:transform) { BibleApi::ParserTransform.new }
+  let(:transform) { BibleRef::ParserTransform.new }
 
   def parse(str)
     parsed = subject.parse(str)

@@ -1,12 +1,12 @@
-require_relative 'lib/bible_api'
+require_relative 'lib/bible_ref'
 
 Gem::Specification.new do |s|
-  s.name         = "bible_api"
-  s.version      = BibleApi::VERSION
+  s.name         = "bible_ref"
+  s.version      = BibleRef::VERSION
   s.author       = "Tim Morgan"
   s.email        = "tim@timmorgan.org"
-  s.homepage     = "https://github.com/seven1m/bible-api"
-  s.summary      = "World English Bible (WEB) API as a Sinatra app + tools for querying bible XML"
+  s.homepage     = "https://github.com/seven1m/bible_ref"
+  s.summary      = "Bible reference parser"
   s.files        = %w(README.md) + Dir['lib/**/*'].to_a
   s.require_path = "lib"
   s.has_rdoc     = true

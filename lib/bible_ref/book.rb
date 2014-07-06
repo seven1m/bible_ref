@@ -1,4 +1,4 @@
-module BibleApi
+module BibleRef
 
   class UnknownCanon < StandardError; end
 

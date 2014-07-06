@@ -1,8 +1,8 @@
-require_relative '../../lib/bible_api/reference'
+require_relative '../../lib/bible_ref/reference'
 
-describe BibleApi::Reference do
+describe BibleRef::Reference do
 
-  subject { BibleApi::Reference.new('John 3:16') }
+  subject { BibleRef::Reference.new('John 3:16') }
 
   describe '#reference' do
     it 'returns the user-supplied reference' do
@@ -12,7 +12,7 @@ describe BibleApi::Reference do
 
   describe '#valid?' do
     context 'given a known reference' do
-      subject { BibleApi::Reference.new('John 3:16') }
+      subject { BibleRef::Reference.new('John 3:16') }
 
       it 'is valid' do
         expect(subject).to be_valid
@@ -20,7 +20,7 @@ describe BibleApi::Reference do
     end
 
     context 'given an unknown book' do
-      subject { BibleApi::Reference.new('Bad 4:1') }
+      subject { BibleRef::Reference.new('Bad 4:1') }
 
       it 'is not valid' do
         expect(subject).to_not be_valid
@@ -28,7 +28,7 @@ describe BibleApi::Reference do
     end
 
     context 'given an poorly-formatted reference' do
-      subject { BibleApi::Reference.new('foo12x34') }
+      subject { BibleRef::Reference.new('foo12x34') }
 
       it 'is not valid' do
         expect(subject).to_not be_valid
@@ -38,7 +38,7 @@ describe BibleApi::Reference do
 
   describe '#ranges' do
     context 'given a single verse' do
-      subject { BibleApi::Reference.new('John 3:16') }
+      subject { BibleRef::Reference.new('John 3:16') }
 
       it 'returns a range with the same verse twice' do
         expect(subject.ranges).to eq([
@@ -49,7 +49,7 @@ describe BibleApi::Reference do
     end
 
     context 'given a ranges of verses' do
-      subject { BibleApi::Reference.new('1 John 5:11-12') }
+      subject { BibleRef::Reference.new('1 John 5:11-12') }
 
       it 'returns a single range with first and last verse' do
         expect(subject.ranges).to eq([
@@ -60,7 +60,7 @@ describe BibleApi::Reference do
     end
 
     context 'given a complicated multi-chapter, multi-verse reference' do
-      subject { BibleApi::Reference.new('Romans 12:1,3-4 & 13:2-4,7-8') }
+      subject { BibleRef::Reference.new('Romans 12:1,3-4 & 13:2-4,7-8') }
 
       it 'returns all rangess in an array' do
         expect(subject.ranges).to eq([
