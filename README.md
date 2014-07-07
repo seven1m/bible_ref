@@ -24,6 +24,10 @@ Turn "John 3:16" into:
 ]
 ```
 
+(We return from/to pairs for every range so to make querying a SQL database easy peasy.)
+
+See [the specs](https://github.com/seven1m/bible_ref/blob/master/spec/bible_ref/reference_spec.rb) for more examples.
+
 ## Copyright
 
 Copyright [Tim Morgan](http://timmorgan.org). See LICENSE.
