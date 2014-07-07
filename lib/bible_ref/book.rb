@@ -190,19 +190,28 @@ module BibleRef
       unless CANONS[@canon]
         raise UnknownCanon.new("#{canon} is not known. Canons this library support are: #{CANONS.join(', ')}")
       end
-      @book = book
+      @book = replace_roman_numerals(book).downcase
     end
 
     def id
       CANONS[@canon].each do |book|
         match = BOOKS[book]
-        return book if @book.downcase =~ match
+        return book if @book =~ match
       end
       nil
     end
 
     def formatted
       FORMATTED_BOOKS[id]
+    end
+
+    private
+
+    def replace_roman_numerals(book)
+      book.sub!(/^iii/i, '3')
+      book.sub!(/^ii/i, '2')
+      book.sub!(/^i/i, '1')
+      book
     end
 
   end

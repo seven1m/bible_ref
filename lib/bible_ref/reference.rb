@@ -41,6 +41,7 @@ module BibleRef
     #
     # 'JOHN 3:16&17' => 'John 3:16,17'
     def normalize
+      return unless book and ranges
       book.formatted + ' ' +
       ranges.map do |(ref_from, ref_to)|
         if ref_from != ref_to

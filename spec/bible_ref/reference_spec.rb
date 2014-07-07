@@ -86,6 +86,17 @@ describe BibleRef::Reference do
         ])
       end
     end
+
+    context 'given a book starting with a roman numeral' do
+      subject { BibleRef::Reference.new('i Chronicles 10:1') }
+
+      it 'returns 1 Chronicles 10:1' do
+        expect(subject.ranges).to eq([
+          [{:book=>"1CH", :chapter=>10, :verse=>1},
+           {:book=>"1CH", :chapter=>10, :verse=>1}]
+        ])
+      end
+    end
   end
 
   describe '#normalize' do
@@ -102,6 +113,22 @@ describe BibleRef::Reference do
 
       it 'returns John 3:16-4:2' do
         expect(subject.normalize).to eq('John 3:16-4:2,3:5,9')
+      end
+    end
+
+    context 'given a bad reference' do
+      subject { BibleRef::Reference.new('nothing 10:1') }
+
+      it 'returns nil' do
+        expect(subject.normalize).to eq(nil)
+      end
+    end
+
+    context 'given a book starting with a roman numeral' do
+      subject { BibleRef::Reference.new('i chronicles 10:1') }
+
+      it 'returns 1 Chronicles 10:1' do
+        expect(subject.normalize).to eq('1 Chronicles 10:1')
       end
     end
   end

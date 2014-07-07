@@ -19,6 +19,14 @@ describe BibleRef::Book do
       end
     end
 
+    context 'given a book name starting with a roman numeral' do
+      subject { BibleRef::Book.new('ii chronicles') }
+
+      it 'returns the USFX identifier' do
+        expect(subject.id).to eq('2CH')
+      end
+    end
+
     context 'given a book not in the canon' do
       subject { BibleRef::Book.new('3 Maccabees', :protestant) }
 
