@@ -21,14 +21,35 @@ module BibleRef
     end
 
     def book
-      @book ||= Book.new(@details[:book]).id
+      return nil unless @details
+      @book ||= Book.new(@details[:book])
     end
 
     def valid?
-      @details and book
+      @details and book.id
+    end
+
+    def normalize
+      book.formatted + ' ' +
+      ranges.map do |(ref_from, ref_to)|
+        if ref_from != ref_to
+          ref_part(ref_from) + '-' + ref_part(ref_to)
+        else
+          ref_part(ref_from)
+        end
+      end.join(',')
     end
 
     private
+
+    def ref_part(ref)
+      if @last_chapter != ref[:chapter] and ref[:chapter]
+        @last_chapter = ref[:chapter]
+        "#{ref[:chapter]}:#{ref[:verse]}"
+      else
+        ref[:verse].to_s
+      end
+    end
 
     def parse
       begin
@@ -45,15 +66,15 @@ module BibleRef
       ch = range.detect { |_, r| r[:chapter] }
       @chapter = ch.last[:chapter] if ch
       [
-        { book: @book, chapter: @chapter }.merge(range[:from]),
-        { book: @book, chapter: @chapter }.merge(range[:to])
+        { book: @book.id, chapter: @chapter }.merge(range[:from]),
+        { book: @book.id, chapter: @chapter }.merge(range[:to])
       ]
     end
 
     def normalize_ref(ref)
       @chapter = ref[:chapter] if ref[:chapter]
       (1..2).map do
-        { book: @book, chapter: @chapter }.merge(ref)
+        { book: @book.id, chapter: @chapter }.merge(ref)
       end
     end
 

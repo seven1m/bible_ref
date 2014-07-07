@@ -59,6 +59,17 @@ describe BibleRef::Reference do
       end
     end
 
+    context 'given a range with spaces' do
+      subject { BibleRef::Reference.new('1 John 5:11-12') }
+
+      it 'returns a single range with first and last verse' do
+        expect(subject.ranges).to eq([
+          [{ book: '1JN', chapter: 5, verse: 11 },
+           { book: '1JN', chapter: 5, verse: 12 }]
+        ])
+      end
+    end
+
     context 'given a complicated multi-chapter, multi-verse reference' do
       subject { BibleRef::Reference.new('Romans 12:1,3-4 & 13:2-4,7-8') }
 
@@ -73,6 +84,24 @@ describe BibleRef::Reference do
           [{ book: 'ROM', chapter: 13, verse: 7 },
            { book: 'ROM', chapter: 13, verse: 8 }]
         ])
+      end
+    end
+  end
+
+  describe '#normalize' do
+    context 'given a single chapter and several verses' do
+      subject { BibleRef::Reference.new('jn 3:16, 17') }
+
+      it 'returns John 3:16,17' do
+        expect(subject.normalize).to eq('John 3:16,17')
+      end
+    end
+
+    context 'given a multiple chapters and verses' do
+      subject { BibleRef::Reference.new('JOHN 3:16-4:2,5&9') }
+
+      it 'returns John 3:16-4:2' do
+        expect(subject.normalize).to eq('John 3:16-4:2,3:5,9')
       end
     end
   end

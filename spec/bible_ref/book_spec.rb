@@ -28,4 +28,12 @@ describe BibleRef::Book do
     end
   end
 
+  describe '#formatted' do
+    subject { BibleRef::Book.new('1 Jn') }
+
+    it 'returns the formatted book name' do
+      expect(subject.formatted).to eq('1 John')
+    end
+  end
+
 end
