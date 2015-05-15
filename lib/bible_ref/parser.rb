@@ -21,7 +21,7 @@ module BibleRef
     rule(:chapter)     { num.as(:chapter) }
     rule(:verse)       { num.as(:verse) }
 
-    rule(:word)        { (match("[0-9]").maybe >> match("[A-Za-z ]").repeat(1)).as(:word) }
+    rule(:word)        { (match("[123]").maybe >> match("[^0-9]").repeat(1)).as(:word) }
     rule(:separator)   { (str(",") >> space.maybe) | (space.maybe >> str("&") >> space.maybe) }
     rule(:num)         { match("[0-9]").repeat(1).as(:num) }
     rule(:space)       { str(" ").repeat(1) }

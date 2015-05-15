@@ -14,4 +14,5 @@ Gem::Specification.new do |s|
   s.has_rdoc     = true
   s.add_dependency("parslet", "~> 1.6")
   s.add_development_dependency("rspec", "~> 3.0")
+  s.add_development_dependency("pry", "~> 0.10.1")
 end

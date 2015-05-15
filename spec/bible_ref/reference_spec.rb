@@ -1,7 +1,6 @@
-require_relative '../../lib/bible_ref/reference'
+require_relative '../spec_helper'
 
 describe BibleRef::Reference do
-
   subject { BibleRef::Reference.new('John 3:16') }
 
   describe '#reference' do
@@ -92,14 +91,22 @@ describe BibleRef::Reference do
 
       it 'returns 1 Chronicles 10:1' do
         expect(subject.ranges).to eq([
-          [{:book=>"1CH", :chapter=>10, :verse=>1},
-           {:book=>"1CH", :chapter=>10, :verse=>1}]
+          [{ book: '1CH', chapter: 10, verse: 1 },
+           { book: '1CH', chapter: 10, verse: 1 }]
         ])
       end
     end
   end
 
   describe '#normalize' do
+    context 'given only a chapter' do
+      subject { BibleRef::Reference.new('jn 3') }
+
+      it 'returns John 3' do
+        expect(subject.normalize).to eq('John 3')
+      end
+    end
+
     context 'given a single chapter and several verses' do
       subject { BibleRef::Reference.new('jn 3:16, 17') }
 
@@ -133,4 +140,45 @@ describe BibleRef::Reference do
     end
   end
 
+  describe '#book_id' do
+    context 'given the full book name' do
+      subject { BibleRef::Reference.new('John 1') }
+
+      it 'returns the USFX identifier' do
+        expect(subject.book_id).to eq('JHN')
+      end
+    end
+
+    context 'given an abbreviated book' do
+      subject { BibleRef::Reference.new('Ez 1') }
+
+      it 'returns the USFX identifier' do
+        expect(subject.book_id).to eq('EZR')
+      end
+    end
+
+    context 'given a book name starting with a roman numeral' do
+      subject { BibleRef::Reference.new('ii chronicles 1') }
+
+      it 'returns the USFX identifier' do
+        expect(subject.book_id).to eq('2CH')
+      end
+    end
+
+    context 'given a book not in the canon' do
+      subject { BibleRef::Reference.new('3 Maccabees 1') }
+
+      it 'returns nil' do
+        expect(subject.book_id).to be_nil
+      end
+    end
+  end
+
+  describe '#book_name' do
+    subject { BibleRef::Reference.new('1 Jn 1') }
+
+    it 'returns the formatted book name' do
+      expect(subject.book_name).to eq('1 John')
+    end
+  end
 end

@@ -1,7 +1,7 @@
-require_relative '../../lib/bible_ref/parser'
+# -*- coding: utf-8 -*-
+require_relative '../spec_helper'
 
 describe BibleRef::Parser do
-
   let(:transform) { BibleRef::ParserTransform.new }
 
   def parse(str)
@@ -14,7 +14,7 @@ describe BibleRef::Parser do
       book: 'John',
       refs: {
         chapter: 3,
-        verse: 16,
+        verse: 16
       }
     )
   end
@@ -63,7 +63,7 @@ describe BibleRef::Parser do
       book: 'Romans',
       refs: [
         { chapter: 12, verse: 1 },
-        {              verse: 2 },
+        {              verse: 2 }
       ]
     )
   end
@@ -73,7 +73,7 @@ describe BibleRef::Parser do
       book: 'Romans',
       refs: [
         { chapter: 12, verse: 1 },
-        {              verse: 2 },
+        {              verse: 2 }
       ]
     )
   end
@@ -126,4 +126,13 @@ describe BibleRef::Parser do
     )
   end
 
+  it 'parses another language' do
+    expect(parse('João 3:16')).to eq(
+      book: 'João',
+      refs: {
+        chapter: 3,
+        verse: 16
+      }
+    )
+  end
 end
