@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require_relative '../spec_helper'
 
 describe BibleRef::Reference do
@@ -170,6 +171,14 @@ describe BibleRef::Reference do
 
       it 'returns nil' do
         expect(subject.book_id).to be_nil
+      end
+    end
+
+    context 'given a book name in a supported language' do
+      subject { BibleRef::Reference.new('João 1', language: 'por') }
+
+      it 'returns the USFX identifier' do
+        expect(subject.book_id).to eq('JHN')
       end
     end
   end
