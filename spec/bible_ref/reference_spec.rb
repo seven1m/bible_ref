@@ -181,6 +181,14 @@ describe BibleRef::Reference do
         expect(subject.book_id).to eq('JHN')
       end
     end
+
+    context 'given an exact book name in Cherokee' do
+      subject { BibleRef::Reference.new('ᎣᏍᏛ ᎧᏃᎮᏛ ᏣᏂ ᎤᏬᏪᎳᏅᎯ 1', language: 'chr') }
+
+      it 'returns the USFX identifier' do
+        expect(subject.book_id).to eq('JHN')
+      end
+    end
   end
 
   describe '#book_name' do

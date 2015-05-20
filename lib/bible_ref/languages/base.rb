@@ -9,8 +9,13 @@ module BibleRef
         book_name = replace_roman_numerals(book_name.downcase)
         return book_name.upcase if books[book_name.upcase] # already normalized
         canon.books.each do |book|
-          match = books[book][:match]
-          return book if book_name =~ match
+          details = books[book]
+          next if details.nil?
+          if (match = details[:match])
+            return book if book_name =~ match
+          else
+            return book if book_name == details[:name]
+          end
         end
         nil
       end
