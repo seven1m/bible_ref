@@ -166,6 +166,14 @@ describe BibleRef::Reference do
       end
     end
 
+    context 'given a book name starting with an I' do
+      subject { BibleRef::Reference.new('isaiah 1') }
+
+      it 'returns the USFX identifier' do
+        expect(subject.book_id).to eq('ISA')
+      end
+    end
+
     context 'given a book not in the canon' do
       subject { BibleRef::Reference.new('3 Maccabees 1') }
 

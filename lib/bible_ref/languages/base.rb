@@ -26,9 +26,9 @@ module BibleRef
       end
 
       def replace_roman_numerals(book)
-        book.sub!(/^iii/i, '3')
-        book.sub!(/^ii/i, '2')
-        book.sub!(/^i/i, '1')
+        book.sub!(/^iii /i, '3 ')
+        book.sub!(/^ii /i, '2 ')
+        book.sub!(/^i /i, '1 ')
         book
       end
     end
