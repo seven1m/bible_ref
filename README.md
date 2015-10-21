@@ -1,7 +1,7 @@
 # BibleRef
 
 This small Rubygem does its best at taking a user-input string like "john 3:16" and turning it into something useful
-for querying a database (this is how we use it in [bible_api](https://github.com/seven1m/bible_api)).
+for querying a database (this is how we use it in [bible_api](https://github.com/churchio/bible_api)).
 
 ## Usage
 
