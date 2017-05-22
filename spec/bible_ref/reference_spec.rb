@@ -151,7 +151,7 @@ describe BibleRef::Reference do
     end
 
     context 'given an abbreviated book' do
-      subject { BibleRef::Reference.new('Ez 1') }
+      subject { BibleRef::Reference.new('Ezr 1') }
 
       it 'returns the USFX identifier' do
         expect(subject.book_id).to eq('EZR')
