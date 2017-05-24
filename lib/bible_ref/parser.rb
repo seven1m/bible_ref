@@ -4,12 +4,20 @@ module BibleRef
   class Parser < Parslet::Parser
     rule(:refs) do
       (
-        (ref_range | ref) >>
-        (
-          separator >>
-          (ref_range | verse_range | ref | verse)
-        ).repeat
+        chapter_range | chapter_and_verse_range
       ).as(:refs)
+    end
+
+    rule(:chapter_range) do
+      chapter >> (separator >> chapter).repeat
+    end
+
+    rule(:chapter_and_verse_range) do
+      (ref_range | ref | chapter) >>
+      (
+        separator >>
+        (ref_range | verse_range | ref | verse)
+      ).repeat
     end
 
     rule(:ref_range)   { (ref.as(:from) >> str("-") >> (ref | verse).as(:to)).as(:range) }

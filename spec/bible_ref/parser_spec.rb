@@ -99,6 +99,27 @@ describe BibleRef::Parser do
     )
   end
 
+  it 'parses mix of chapter and chapter+verse range' do
+    expect(parse('Psalms 138,139:1-17,18-23')).to eq(
+      book: 'Psalms',
+      refs: [
+        { chapter: 138 },
+        {
+          range: {
+            from: { chapter: 139, verse: 1 },
+            to:   {               verse: 17 }
+          }
+        },
+        {
+          range: {
+            from: { verse: 18 },
+            to:   { verse: 23 }
+          }
+        }
+      ]
+    )
+  end
+
   it 'parses a whole chapter' do
     expect(parse('Romans 12')).to eq(
       book: 'Romans',
