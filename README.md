@@ -12,7 +12,7 @@ ref = BibleRef::Reference.new('jn 3:16')
 ref.valid?
 # true
 
-ref.book.id
+ref.book_id
 # "JHN"
 
 ref.normalize
