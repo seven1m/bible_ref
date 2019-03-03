@@ -7,7 +7,8 @@ module BibleRef
   LANGUAGES = {
     'chr' => Languages::Cherokee,
     'eng' => Languages::English,
+    'lat' => Languages::Latin,
     'por' => Languages::Portuguese,
     'ron' => Languages::Romanian
-  }
+  }.freeze
 end
