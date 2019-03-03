@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
   s.description  = "Bible reference parser returns normalized sets of ranges, ideal for querying a database or XML data source such as WEB in USFX."
   s.files        = %w(README.md) + Dir['lib/**/*'].to_a
   s.require_path = "lib"
-  s.has_rdoc     = true
   s.add_dependency("parslet", "~> 1.6")
   s.add_development_dependency("rspec", "~> 3.0")
   s.add_development_dependency("pry", "~> 0.10.1")
