@@ -1,5 +1,6 @@
 require_relative 'languages/cherokee'
 require_relative 'languages/english'
+require_relative 'languages/latin'
 require_relative 'languages/portuguese'
 require_relative 'languages/romanian'
 

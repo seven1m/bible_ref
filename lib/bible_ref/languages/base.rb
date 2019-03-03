@@ -14,7 +14,7 @@ module BibleRef
           if (match = details[:match])
             return book if book_name.downcase =~ match
           else
-            return book if book_name == details[:name]
+            return book if book_name.downcase == details[:name].downcase
           end
         end
         nil
