@@ -238,10 +238,37 @@ describe BibleRef::Reference do
   end
 
   describe '#book_name' do
-    subject { BibleRef::Reference.new('1 Jn 1') }
+    context 'given the book of John' do
+      subject { BibleRef::Reference.new('1 Jn 1') }
 
-    it 'returns the formatted book name' do
-      expect(subject.book_name).to eq('1 John')
+      it 'returns the formatted book name' do
+        expect(subject.book_name).to eq('1 John')
+      end
     end
+
+    context 'given the book of Judith with the abbreviation "jdt"' do
+      subject { BibleRef::Reference.new('jdt 1:1') }
+
+      it 'returns the book of Judith' do
+        expect(subject.book_name).to eq('Judith')
+      end
+    end
+
+    context 'given the book of Jude with the abbreviation "jud"' do
+      subject { BibleRef::Reference.new('jud 1:1') }
+
+      it 'returns the book of Jude' do
+        expect(subject.book_name).to eq('Jude')
+      end
+    end
+
+    context 'given the book of Jude with the abbreviation "jd"' do
+      subject { BibleRef::Reference.new('jd 1:1') }
+
+      it 'returns the book of Jude' do
+        expect(subject.book_name).to eq('Jude')
+      end
+    end
+
   end
 end

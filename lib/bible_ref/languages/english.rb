@@ -46,7 +46,7 @@ module BibleRef
           'ZEC' => { match: /^zec/,              name: 'Zechariah'              },
           'MAL' => { match: /^mal/,              name: 'Malachi'                },
           'TOB' => { match: /^tob/,              name: 'Tobit'                  },
-          'JDT' => { match: /^(jud|jdt)/,        name: 'Judith'                 },
+          'JDT' => { match: /^(jth|jdth?)/,      name: 'Judith'                 },
           'ESG' => { match: /^(est.*greek|esg)/, name: 'Esther (Greek)'         },
           'WIS' => { match: /^wis(dom)?/,        name: 'Wisdom of Solomon'      },
           'SIR' => { match: /^sir/,              name: 'Sirach'                 },
@@ -88,7 +88,7 @@ module BibleRef
           '1JN' => { match: /^1 ?jo?h?n/,        name: '1 John'                 },
           '2JN' => { match: /^2 ?jo?h?n/,        name: '2 John'                 },
           '3JN' => { match: /^3 ?jo?h?n/,        name: '3 John'                 },
-          'JUD' => { match: /^jud/,              name: 'Jude'                   },
+          'JUD' => { match: /^(jud$|jd$)/,        name: 'Jude'                   },
           'REV' => { match: /^re?v/,             name: 'Revelation'             }
         }
       end
