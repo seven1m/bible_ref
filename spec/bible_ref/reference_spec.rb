@@ -213,7 +213,7 @@ describe BibleRef::Reference do
     end
 
     context 'given a book not in the canon' do
-      subject { BibleRef::Reference.new('3 Maccabees 1') }
+      subject { BibleRef::Reference.new('3 Maccabees 1', canon: 'protestant') }
 
       it 'returns nil' do
         expect(subject.book_id).to be_nil
@@ -239,12 +239,61 @@ describe BibleRef::Reference do
 
   describe '#book_name' do
     context 'given the book of John' do
-      subject { BibleRef::Reference.new('1 Jn 1') }
+      subject { BibleRef::Reference.new('1 Jn 1', language: 'eng', canon: 'protestant') }
 
       it 'returns the formatted book name' do
         expect(subject.book_name).to eq('1 John')
       end
     end
+
+    context 'given the book of Tobit with the abbreviation "tob"' do
+      subject { BibleRef::Reference.new('tob 1:1') }
+
+      it 'returns the book of Tobit' do
+        expect(subject.book_name).to eq('Tobit')
+      end
+    end
+
+    context 'given the book of Tobit with no abbreviation' do
+      subject { BibleRef::Reference.new('Tobit 1:1') }
+
+      it 'returns the book of Tobit' do
+        expect(subject.book_name).to eq('Tobit')
+      end
+    end
+
+    context 'given the book of Judith with no abbreviation' do
+      subject { BibleRef::Reference.new('judith 1:1') }
+
+      it 'returns the book of Judith' do
+        expect(subject.book_name).to eq('Judith')
+      end
+    end
+
+    context 'given the book of Judith with no abbreviation and capitalization' do
+      subject { BibleRef::Reference.new('Judith 1:1') }
+
+      it 'returns the book of Judith' do
+        expect(subject.book_name).to eq('Judith')
+      end
+    end
+
+    context 'given the book of Judith with the abbreviation "jth"' do
+      subject { BibleRef::Reference.new('jth 1:1') }
+
+      it 'returns the book of Judith' do
+        expect(subject.book_name).to eq('Judith')
+      end
+    end
+
+    context 'given the book of Judith with the abbreviation "jdth"' do
+      subject { BibleRef::Reference.new('jdth 1:1') }
+
+      it 'returns the book of Judith' do
+        expect(subject.book_name).to eq('Judith')
+      end
+    end
+
 
     context 'given the book of Judith with the abbreviation "jdt"' do
       subject { BibleRef::Reference.new('jdt 1:1') }

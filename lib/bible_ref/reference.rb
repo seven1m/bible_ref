@@ -7,7 +7,7 @@ module BibleRef
     attr_reader :book, :reference, :language, :canon
 
     # Create a new Reference instance by passing in the user-supplied bible reference as a string.
-    def initialize(reference, language: 'eng', canon: 'protestant')
+    def initialize(reference, language: 'eng', canon: 'all')
       @reference = reference
       @details = parse
       @language = language.respond_to?(:book_id) ? language : LANGUAGES.fetch(language.to_s).new
