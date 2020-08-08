@@ -318,6 +318,60 @@ describe BibleRef::Reference do
         expect(subject.book_name).to eq('Jude')
       end
     end
+    context 'given the book of Mark with an abbreviation Mk' do
+      subject { BibleRef::Reference.new('Mk 1:5') }
 
+      it 'returns the book of Mark' do
+        expect(subject.book_name).to eq('Mark')
+      end
+    end
+
+    context 'given the book of Mark with the full name' do
+      subject { BibleRef::Reference.new('Mark 1:5') }
+
+      it 'returns the book of Mark' do
+        expect(subject.book_name).to eq('Mark')
+      end
+    end
+
+    context 'given the book of Mark with the abbreviation mrk' do
+      subject { BibleRef::Reference.new('Mrk 1:5') }
+
+      it 'returns the book of Mark' do
+        expect(subject.book_name).to eq('Mark')
+      end
+    end
+
+    context 'given the book of Mark with an abbreviation Mk and translation Portuguese' do
+      subject { BibleRef::Reference.new('Mk 1:5', language: 'por') }
+
+      it 'returns the book of Marcos' do
+        expect(subject.book_name).to eq('Marcos')
+      end
+    end
+
+    context 'given the book of Mark with the full name and translation Portuguese' do
+      subject { BibleRef::Reference.new('Mark 1:5', language: 'por') }
+
+      it 'returns the book of Marcos' do
+        expect(subject.book_name).to eq('Marcos')
+      end
+    end
+
+    context 'given the book of Mark with an abbreviation Mk and translation Romanian' do
+      subject { BibleRef::Reference.new('Mk 1:5', language: 'ron') }
+
+      it 'returns the book of Marcu' do
+        expect(subject.book_name).to eq('Marcu')
+      end
+    end
+
+    context 'given the book of Mark with the full name and the translation Romanian' do
+      subject { BibleRef::Reference.new('Mark 1:5', language: 'ron') }
+
+      it 'returns the book of Marcu' do
+        expect(subject.book_name).to eq('Marcu')
+      end
+    end
   end
 end
