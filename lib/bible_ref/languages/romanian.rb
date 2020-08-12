@@ -46,7 +46,7 @@ module BibleRef
           'ZEC' => { match: /^za/,              name: 'Zaharia'               },
           'MAL' => { match: /^mal/,             name: 'Maleahi'               },
           'MAT' => { match: /^mat/,             name: 'Matei'                 },
-          'MRK' => { match: /^mar/,             name: 'Marcu'                 },
+          'MRK' => { match: /^(mar|mk)/,        name: 'Marcu'                 },
           'LUK' => { match: /^lu/,              name: 'Luca'                  },
           'JHN' => { match: /^io/,              name: 'Ioan'                  },
           'ACT' => { match: /^fa/,              name: 'Faptele apostolilor'   },

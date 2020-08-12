@@ -64,7 +64,7 @@ module BibleRef
           '2ES' => { match: /^2 ?esd?/,          name: '2 Esdras'               },
           '4MA' => { match: /^4 ?mac?/,          name: '4 Maccabees'            },
           'MAT' => { match: /^mat/,              name: 'Matthew'                },
-          'MRK' => { match: /^ma?rk/,            name: 'Mark'                   },
+          'MRK' => { match: /^(ma?rk|mk)/,       name: 'Mark'                   },
           'LUK' => { match: /^lu?k/,             name: 'Luke'                   },
           'JHN' => { match: /^(john|jn|jhn)/,    name: 'John'                   },
           'ACT' => { match: /^act/,              name: 'Acts'                   },
