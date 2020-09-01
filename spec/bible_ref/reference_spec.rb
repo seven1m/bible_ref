@@ -99,7 +99,7 @@ describe BibleRef::Reference do
     end
 
     context 'given the book of Jude with a single verse' do
-      subject { BibleRef::Reference.new('Jude 3') }
+      subject { BibleRef::Reference.new('Jude 1:3') }
 
       it 'returns the proper range' do
         expect(subject.ranges).to eq([
@@ -109,11 +109,21 @@ describe BibleRef::Reference do
       end
     end
 
-    context 'given the book of Jude with a multiple verses' do
-      subject { BibleRef::Reference.new('Jude 3,5,7') }
+    context 'given the book of Jude with no verses' do
+        subject { BibleRef::Reference.new('Jude 1') }
 
-      # TODO: this will require some changes to the parser to properly parse hyphenated chapter ranges
-      xit 'returns the proper range' do
+        it 'returns the proper range' do
+          expect(subject.ranges).to eq([
+            [{ book: 'JUD', chapter: 1 },
+             { book: 'JUD', chapter: 1 }]
+          ])
+        end
+    end
+
+    context 'given the book of Jude with a multiple verses' do
+      subject { BibleRef::Reference.new('Jude 1:3,5,7') }
+
+      it 'returns the proper range' do
         expect(subject.ranges).to eq([
           [{ book: 'JUD', chapter: 1, verse: 3 },
            { book: 'JUD', chapter: 1, verse: 3 }],
@@ -126,7 +136,7 @@ describe BibleRef::Reference do
     end
 
     context 'given the book of Jude with a verse range' do
-      subject { BibleRef::Reference.new('Jude 1-25') }
+      subject { BibleRef::Reference.new('Jude 1:1-25') }
 
       it 'returns the proper range' do
         expect(subject.ranges).to eq([
