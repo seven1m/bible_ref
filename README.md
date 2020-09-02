@@ -53,6 +53,11 @@ verses = ranges.map do |from_ref, to_ref|
 end
 ```
 
+## Note
+
+When searching a book that contains a single chapter (ie. Obadiah, Philemon, Jude, 2 John, 3 John), you can use either Jude 1 or Jude 1:1 to retrieve verse 1.
+This is quite different from searching a book with multiple chapters.  **John 1** will return all of chapter 1, where as **Jude 1** only returns the first verse.
+
 ## Copyright
 
 Copyright [Tim Morgan](http://timmorgan.org). Licensed MIT.

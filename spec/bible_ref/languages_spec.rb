@@ -85,6 +85,14 @@ describe BibleRef::LANGUAGES do
       end
     end
 
+    context 'given the book of Judith in English' do
+      subject { BibleRef::LANGUAGES.fetch('eng').new }
+
+      it 'does not have one chapter' do
+        expect(subject.has_single_chapter?('Judith 4:1')).to be_falsey
+      end
+    end
+
   end
 
 end
