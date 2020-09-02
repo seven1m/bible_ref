@@ -8,10 +8,11 @@ module BibleRef
 
     # Create a new Reference instance by passing in the user-supplied bible reference as a string.
     def initialize(reference, language: 'eng', canon: 'all')
-      @reference = reference
-      @details = parse
       @language = language.respond_to?(:book_id) ? language : LANGUAGES.fetch(language.to_s).new
       @canon = canon.respond_to?(:books) ? canon : CANONS.fetch(canon.to_s).new
+      @reference = reference
+      standardize_reference()
+      @details = parse
     end
 
     # Returns an array of pairs, each one being the from and to for a range.
@@ -22,7 +23,6 @@ module BibleRef
     def ranges
       return nil unless valid?
       @chapter = nil
-      fix_chapter_for_jude if book_id == 'JUD'
       [@details[:refs]].flatten.map do |ref|
         normalize_range(ref) || normalize_ref(ref)
       end
@@ -75,6 +75,19 @@ module BibleRef
       end
     end
 
+    # standardize the reference so it can be handed to the parser.
+    def standardize_reference
+        return @reference unless @language.has_single_chapter?(@reference)
+        return @reference if @reference.include? ':'
+
+        matches = @reference.match(/^([\d]?[\D\s]*)/)
+        return @reference if matches.length() == 0
+
+        book = matches[0].strip
+        requested = @reference.sub(book, '').strip
+        @reference = "#{book} 1:#{requested}"
+    end
+
     def parse
       begin
         parsed = Parser.new.parse(@reference)
@@ -102,23 +115,5 @@ module BibleRef
       end
     end
 
-    def fix_chapter_for_jude
-      (start, finish) = @details[:refs]
-      finish ||= start
-      @details[:refs] = [
-        {
-          range: {
-            from: {
-              chapter: 1,
-              verse: start[:chapter]
-            },
-            to: {
-              chapter: 1,
-              verse: finish[:chapter]
-            }
-          }
-        }
-      ]
-    end
   end
 end

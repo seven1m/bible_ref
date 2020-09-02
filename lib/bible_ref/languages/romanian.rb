@@ -4,6 +4,13 @@ require_relative 'base'
 module BibleRef
   module Languages
     class Romanian < Base
+
+      # Is it a single chapter book?
+      def has_single_chapter?(reference)
+          matches = [/^ob/, /^iud/, /^2 io/, /^3 io/, /^fil/]
+          return Regexp.union(matches).match?(reference.downcase)
+      end
+
       def books
         {
           'GEN' => { match: /^gen/,             name: 'Geneza'                },

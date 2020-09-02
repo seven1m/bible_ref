@@ -8,6 +8,14 @@ describe BibleRef::Reference do
     it 'returns the user-supplied reference' do
       expect(subject.reference).to eq('John 3:16')
     end
+
+    context 'given a single chapter book' do
+      subject { BibleRef::Reference.new('Philemon 8') }
+
+      it 'standardizes the reference' do
+        expect(subject.reference).to eq('Philemon 1:8')
+      end
+    end
   end
 
   describe '#valid?' do
@@ -98,8 +106,8 @@ describe BibleRef::Reference do
       end
     end
 
-    context 'given the book of Jude with a single verse' do
-      subject { BibleRef::Reference.new('Jude 3') }
+    context 'given the book of Jude, properly formatted, with a single verse' do
+      subject { BibleRef::Reference.new('Jude 1:3') }
 
       it 'returns the proper range' do
         expect(subject.ranges).to eq([
@@ -109,11 +117,21 @@ describe BibleRef::Reference do
       end
     end
 
-    context 'given the book of Jude with a multiple verses' do
+    context 'given the book of Jude, improperly formatted, with a single verse' do
+        subject { BibleRef::Reference.new('Jude 4') }
+
+        it 'returns the proper range' do
+          expect(subject.ranges).to eq([
+              [{ book: 'JUD', chapter: 1, verse: 4 },
+              { book: 'JUD', chapter: 1, verse: 4 }]
+          ])
+        end
+    end
+
+    context 'given the book of Jude, improperly formatted, with multiple verses' do
       subject { BibleRef::Reference.new('Jude 3,5,7') }
 
-      # TODO: this will require some changes to the parser to properly parse hyphenated chapter ranges
-      xit 'returns the proper range' do
+      it 'returns the proper range' do
         expect(subject.ranges).to eq([
           [{ book: 'JUD', chapter: 1, verse: 3 },
            { book: 'JUD', chapter: 1, verse: 3 }],
@@ -125,16 +143,50 @@ describe BibleRef::Reference do
       end
     end
 
-    context 'given the book of Jude with a verse range' do
-      subject { BibleRef::Reference.new('Jude 1-25') }
+    context 'given the book of Obadiah, properly formatted, with a range of verses' do
+      subject { BibleRef::Reference.new('Obadiah 1:1-5') }
 
       it 'returns the proper range' do
         expect(subject.ranges).to eq([
-          [{ book: 'JUD', chapter: 1, verse: 1 },
-           { book: 'JUD', chapter: 1, verse: 25 }]
+          [{ book: 'OBA', chapter: 1, verse: 1 },
+           { book: 'OBA', chapter: 1, verse: 5 }]
         ])
       end
     end
+
+    context 'given the book of Obadiah, improperly formatted, with a range of verses' do
+      subject { BibleRef::Reference.new('Obadiah 3-8') }
+
+      it 'returns the proper range' do
+        expect(subject.ranges).to eq([
+          [{ book: 'OBA', chapter: 1, verse: 3 },
+           { book: 'OBA', chapter: 1, verse: 8 }]
+        ])
+      end
+    end
+
+    context 'given the book of Joannis II, properly formatted, with a range of verses' do
+      subject { BibleRef::Reference.new('Joannis II 1:8-10', language: 'lat') }
+
+      it 'returns the proper range' do
+        expect(subject.ranges).to eq([
+          [{ book: '2JN', chapter: 1, verse: 8 },
+           { book: '2JN', chapter: 1, verse: 10 }]
+        ])
+      end
+    end
+
+    context 'given the book of Joannis II, improperly formatted, with a range of verses' do
+      subject { BibleRef::Reference.new('Joannis II 4-9', language: 'lat') }
+
+      it 'returns the proper range' do
+        expect(subject.ranges).to eq([
+          [{ book: '2JN', chapter: 1, verse: 4 },
+           { book: '2JN', chapter: 1, verse: 9 }]
+        ])
+      end
+    end
+
   end
 
   describe '#normalize' do
@@ -374,4 +426,5 @@ describe BibleRef::Reference do
       end
     end
   end
+
 end
