@@ -4,6 +4,13 @@ require_relative 'base'
 module BibleRef
   module Languages
     class Cherokee < Base
+
+      # Is it a single chapter book?
+      def has_single_chapter?(reference)
+          matches = ['ᏉᎳ ᏆᎵᎹᏂ ᎤᏬᏪᎳᏁᎸᎯ', 'ᏣᏂ ᏔᎵᏁ ᎤᏬᏪᎳᏅᎯ', 'ᏣᏂ ᏦᎢᏁ ᎤᏬᏪᎳᏅᎯ', 'ᏧᏓᏏ ᎤᏬᏪᎳᏅᎯ']
+          return matches.any? { |e| reference.include?(e)  }
+      end
+
       def books
         {
           'MAT' => { name: 'ᎣᏍᏛ ᎧᏃᎮᏛ ᎹᏚ ᎤᏬᏪᎳᏅᎯ' },
