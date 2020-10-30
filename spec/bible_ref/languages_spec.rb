@@ -93,6 +93,22 @@ describe BibleRef::LANGUAGES do
       end
     end
 
+    context 'given the book of Jude in English' do
+      subject { BibleRef::LANGUAGES.fetch('eng').new }
+
+      it 'has one chapter' do
+        expect(subject.has_single_chapter?('Jude 1:1')).to be_truthy
+      end
+    end
+
+    context 'given the book of Judges in Englsh' do
+      subject { BibleRef::LANGUAGES.fetch('eng').new }
+
+      it 'does not have one chapter' do
+        expect(subject.has_single_chapter?('Judges 1:1')).to be_falsey
+      end
+    end
+
   end
 
 end
