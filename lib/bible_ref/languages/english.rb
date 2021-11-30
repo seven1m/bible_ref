@@ -4,11 +4,10 @@ require_relative 'base'
 module BibleRef
   module Languages
     class English < Base
-
       # Is it a single chapter book?
       def has_single_chapter?(reference)
-          matches = [/^ob/, /^(jude|jd(?!th)|jud(?!ith)(?!ges))/, /^2 ?jo?h?n/, /^3 ?jo?h?n/, /^ph(i?l|m)/]
-          return Regexp.union(matches).match?(reference.downcase)
+        matches = [/^ob/, /^(jud|jd|jude)\b/, /^2 ?jo?h?n/, /^3 ?jo?h?n/, /^(philem|phm|pm)/]
+        return Regexp.union(matches).match?(reference.downcase)
       end
 
       def books
@@ -80,14 +79,14 @@ module BibleRef
           '2CO' => { match: /^2 ?cor?/,          name: '2 Corinthians'          },
           'GAL' => { match: /^gal/,              name: 'Galatians'              },
           'EPH' => { match: /^eph/,              name: 'Ephesians'              },
-          'PHP' => { match: /^(phill?i|php)/,    name: 'Philippians'            },
+          'PHP' => { match: /^(phil|php|pp)/,    name: 'Philippians'            },
           'COL' => { match: /^col/,              name: 'Colossians'             },
           '1TH' => { match: /^1 ?the?s?/,        name: '1 Thessalonians'        },
           '2TH' => { match: /^2 ?the?s?/,        name: '2 Thessalonians'        },
           '1TI' => { match: /^1 ?tim?/,          name: '1 Timothy'              },
           '2TI' => { match: /^2 ?tim?/,          name: '2 Timothy'              },
           'TIT' => { match: /^tit/,              name: 'Titus'                  },
-          'PHM' => { match: /^ph(i?l|m)/,        name: 'Philemon'               },
+          'PHM' => { match: /^(philem|phm|pm)/,  name: 'Philemon'               },
           'HEB' => { match: /^heb/,              name: 'Hebrews'                },
           'JAS' => { match: /^ja(m|s)/,          name: 'James'                  },
           '1PE' => { match: /^1 ?pet?/,          name: '1 Peter'                },
@@ -95,7 +94,7 @@ module BibleRef
           '1JN' => { match: /^1 ?jo?h?n/,        name: '1 John'                 },
           '2JN' => { match: /^2 ?jo?h?n/,        name: '2 John'                 },
           '3JN' => { match: /^3 ?jo?h?n/,        name: '3 John'                 },
-          'JUD' => { match: /^(jud$|jd$|jude$)/, name: 'Jude'                   },
+          'JUD' => { match: /^(jud|jd|jude)$/,   name: 'Jude'                   },
           'REV' => { match: /^re?v/,             name: 'Revelation'             }
         }
       end
