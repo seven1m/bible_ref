@@ -79,7 +79,7 @@ module BibleRef
           '2CO' => { match: /^2 ?cor?/,          name: '2 Corinthians'          },
           'GAL' => { match: /^gal/,              name: 'Galatians'              },
           'EPH' => { match: /^eph/,              name: 'Ephesians'              },
-          'PHP' => { match: /^(phil|php|pp)/,    name: 'Philippians'            },
+          'PHP' => { match: /^(phil$|philip|phillip|php|pp)/, name: 'Philippians' },
           'COL' => { match: /^col/,              name: 'Colossians'             },
           '1TH' => { match: /^1 ?the?s?/,        name: '1 Thessalonians'        },
           '2TH' => { match: /^2 ?the?s?/,        name: '2 Thessalonians'        },

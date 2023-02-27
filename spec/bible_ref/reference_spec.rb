@@ -394,6 +394,22 @@ describe BibleRef::Reference do
       end
     end
 
+    context 'given the book of Philemon with the full name' do
+      subject { BibleRef::Reference.new('Philemon 1:1') }
+
+      it 'returns the book of Philemon' do
+        expect(subject.book_name).to eq('Philemon')
+      end
+    end
+
+    context 'given the book of Philippians with the full name' do
+      subject { BibleRef::Reference.new('Philippians 1:1') }
+
+      it 'returns the book of Philippians' do
+        expect(subject.book_name).to eq('Philippians')
+      end
+    end
+
     context 'given the book of Mark with an abbreviation Mk and translation Portuguese' do
       subject { BibleRef::Reference.new('Mk 1:5', language: 'por') }
 
