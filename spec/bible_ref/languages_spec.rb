@@ -109,6 +109,14 @@ describe BibleRef::LANGUAGES do
       end
     end
 
+    context 'given the book of Filemonovi' do
+      subject { BibleRef::LANGUAGES.fetch('cze').new }
+
+      it 'has one chapter' do
+        expect(subject.has_single_chapter?('Filemonovi 3-2')).to be_truthy
+      end
+    end
+
   end
 
 end
