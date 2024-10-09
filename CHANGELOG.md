@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.7.0 (2024-10-08)
+
+- FEAT: Add Russian language support
+
 ## 1.6.0 (2024-02-03)
 
 - FEAT: Add Czech language support
