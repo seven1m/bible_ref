@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.8.0 (2024-12-24)
+
+- FEAT: Add Traditional Chinese language support
+
 ## 1.7.0 (2024-10-08)
 
 - FEAT: Add Russian language support
