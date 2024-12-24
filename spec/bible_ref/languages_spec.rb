@@ -117,6 +117,21 @@ describe BibleRef::LANGUAGES do
       end
     end
 
+    context 'given the book of Revelation in Chinese' do
+      subject { BibleRef::LANGUAGES.fetch('zh-tw').new }
+
+      it 'does not have one chapter' do
+        expect(subject.has_single_chapter?('啟示錄 1:1')).to be_falsey
+      end
+    end
+
+    context 'given the book of 2 John in Chinese' do
+      subject { BibleRef::LANGUAGES.fetch('zh-tw').new }
+
+      it 'has one chapter' do
+        expect(subject.has_single_chapter?('約翰貳書 1:1')).to be_truthy
+      end
+    end
   end
 
 end
