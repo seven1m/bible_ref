@@ -1,4 +1,5 @@
 require_relative 'languages/cherokee'
+require_relative 'languages/chinese'
 require_relative 'languages/czech'
 require_relative 'languages/english'
 require_relative 'languages/latin'
@@ -9,6 +10,7 @@ require_relative 'languages/russian'
 module BibleRef
   LANGUAGES = {
     'chr' => Languages::Cherokee,
+    'zh-tw' => Languages::Chinese,
     'cze' => Languages::Czech,
     'eng' => Languages::English,
     'lat' => Languages::Latin,
