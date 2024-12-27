@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.8.1 (2024-12-27)
+
+- FIX: Song of Solomon did not match in Portuguese
+
 ## 1.8.0 (2024-12-24)
 
 - FEAT: Add Traditional Chinese language support
