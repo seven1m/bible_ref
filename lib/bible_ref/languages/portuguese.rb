@@ -34,7 +34,7 @@ module BibleRef
           'PSA' => { match: /^sal/,             name: 'Salmos'            },
           'PRO' => { match: /^pro?v/,           name: 'Provérbios'        },
           'ECC' => { match: /^ecl/,             name: 'Eclesiastes'       },
-          'SNG' => { match: /^c[aâ]n$/,         name: 'Cânticos'          },
+          'SNG' => { match: /^c[aâ]n/,          name: 'Cânticos'          },
           'ISA' => { match: /^isa/,             name: 'Isaías'            },
           'JER' => { match: /^jer/,             name: 'Jeremias'          },
           'LAM' => { match: /^lam/,             name: 'Lamentações'       },
