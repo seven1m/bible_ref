@@ -1,4 +1,5 @@
 require_relative 'bible_ref/reference'
+require_relative 'bible_ref/version'
 
 module BibleRef
   module_function
