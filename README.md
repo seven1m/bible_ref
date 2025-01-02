@@ -53,10 +53,32 @@ verses = ranges.map do |from_ref, to_ref|
 end
 ```
 
-## Note
+## Single-Chapter Book Matching
 
-When searching a book that contains a single chapter (ie. Obadiah, Philemon, Jude, 2 John, 3 John), you can use either Jude 1 or Jude 1:1 to retrieve verse 1.
-This is quite different from searching a book with multiple chapters.  **John 1** will return all of chapter 1, where as **Jude 1** only returns the first verse.
+Passing `single_chapter_book_matching` keyword to `Reference` changes how single-chapter books are handled.
+It affects how something like `Jude 1` is parsed:
+
+| setting            | input  | result                   |
+|--------------------|--------|--------------------------|
+| :special (default) | jude 1 | single verse of Jude 1:1 |
+| :indifferent       | jude 1 | whole chapter of Jude    |
+
+While the default of `:special` seems to match what most people expect, using the `:indifferent` setting will make `jude 1`
+behave the same as something like `john 1` -- both will return the entire chapter.
+
+```ruby
+BibleRef::Reference.new('jude 1').ranges
+# [
+#   [{ book: 'JUD', chapter: 1, verse: 1 },
+#    { book: 'JUD', chapter: 1, verse: 1 }]
+# ]
+
+BibleRef::Reference.new('jude 1', single_chapter_book_matching: :indifferent).ranges
+# [
+#   [{ book: 'JUD', chapter: 1 },
+#    { book: 'JUD', chapter: 1 }]
+# ]
+```
 
 ## Copyright
 

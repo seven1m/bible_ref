@@ -106,13 +106,35 @@ describe BibleRef::Reference do
       end
     end
 
-    context 'given the book of Jude, properly formatted, with a single verse' do
+    context 'given the book of Jude, properly formatted, with chapter and a single verse' do
       subject { BibleRef::Reference.new('Jude 1:3') }
 
       it 'returns the proper range' do
         expect(subject.ranges).to eq([
           [{ book: 'JUD', chapter: 1, verse: 3 },
            { book: 'JUD', chapter: 1, verse: 3 }]
+        ])
+      end
+    end
+
+    context 'given the book of Jude, properly formatted, with a single verse of 1' do
+      subject { BibleRef::Reference.new('Jude 1') }
+
+      it 'returns the proper range' do
+        expect(subject.ranges).to eq([
+          [{ book: 'JUD', chapter: 1, verse: 1 },
+           { book: 'JUD', chapter: 1, verse: 1 }]
+        ])
+      end
+    end
+
+    context 'given the book of Jude, properly formatted, with a single numeral 1, with the option of single_chapter_book_matching: :indifferent' do
+      subject { BibleRef::Reference.new('Jude 1', single_chapter_book_matching: :indifferent) }
+
+      it 'returns the proper range' do
+        expect(subject.ranges).to eq([
+          [{ book: 'JUD', chapter: 1 },
+           { book: 'JUD', chapter: 1 }]
         ])
       end
     end

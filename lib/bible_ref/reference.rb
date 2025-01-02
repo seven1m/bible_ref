@@ -7,11 +7,13 @@ module BibleRef
     attr_reader :book, :reference, :language, :canon
 
     # Create a new Reference instance by passing in the user-supplied bible reference as a string.
-    def initialize(reference, language: 'eng', canon: 'all')
+    def initialize(reference, language: 'eng', canon: 'all', single_chapter_book_matching: :special)
       @language = language.respond_to?(:book_id) ? language : LANGUAGES.fetch(language.to_s).new
       @canon = canon.respond_to?(:books) ? canon : CANONS.fetch(canon.to_s).new
       @reference = reference
-      standardize_reference()
+      @single_chapter_book_matching = single_chapter_book_matching
+      raise 'expected :special or :indifferent' unless %i[special indifferent].include?(@single_chapter_book_matching)
+      standardize_reference
       @details = parse
     end
 
@@ -75,17 +77,20 @@ module BibleRef
       end
     end
 
-    # standardize the reference so it can be handed to the parser.
     def standardize_reference
-        return @reference unless @language.has_single_chapter?(@reference)
-        return @reference if @reference.include? ':'
+      standardize_single_chapter_book if @language.has_single_chapter?(@reference)
+    end
 
-        matches = @reference.match(/^([\d]?[\D\s]*)/)
-        return @reference if matches.length() == 0
+    def standardize_single_chapter_book
+      return if @single_chapter_book_matching == :indifferent
+      return @reference if @reference.include? ':'
 
-        book = matches[0].strip
-        requested = @reference.sub(book, '').strip
-        @reference = "#{book} 1:#{requested}"
+      matches = @reference.match(/^([\d]?[\D\s]*)/)
+      return @reference if matches.length() == 0
+
+      book = matches[0].strip
+      requested = @reference.sub(book, '').strip
+      @reference = "#{book} 1:#{requested}"
     end
 
     def parse
