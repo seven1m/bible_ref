@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.9.0 (2025-01-01)
+
+- FEAT: Add `single_chapter_book_matching` option to `Reference` to change how single-chapter books are handled
+
 ## 1.8.1 (2024-12-27)
 
 - FIX: Song of Solomon did not match in Portuguese
