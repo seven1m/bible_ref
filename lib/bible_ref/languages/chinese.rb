@@ -75,8 +75,8 @@ module BibleRef
           '1PE' => { match: /^彼得前/, name: '彼得前書'},
           '2PE' => { match: /^彼得後/, name: '彼得前書'},
           '1JN' => { match: /壹書$/, name: '約翰壹書'},
-          '2JH' => { match: /貳書$/, name: '約翰貳書'},
-          '3JH' => { match: /參書$/, name: '約翰參書'},
+          '2JN' => { match: /貳書$/, name: '約翰貳書'},
+          '3JN' => { match: /參書$/, name: '約翰參書'},
           'JUD' => { match: /^猶/, name: '猶大書'},
           'REV' => { match: /^啟/, name: '啟示錄'}
         }
