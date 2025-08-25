@@ -73,7 +73,7 @@ module BibleRef
           'HEB' => { match: /^希/, name: '希伯來書'},
           'JAS' => { match: /^雅各/, name: '雅各書'},
           '1PE' => { match: /^彼得前/, name: '彼得前書'},
-          '2PE' => { match: /^彼得後/, name: '彼得前書'},
+          '2PE' => { match: /^彼得後/, name: '彼得後書'},
           '1JN' => { match: /壹書$/, name: '約翰壹書'},
           '2JN' => { match: /貳書$/, name: '約翰貳書'},
           '3JN' => { match: /參書$/, name: '約翰參書'},
