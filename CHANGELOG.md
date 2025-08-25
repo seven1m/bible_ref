@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.9.1 (2025-08-25)
+
+- FIX: Chinese language typos
+
 ## 1.9.0 (2025-01-01)
 
 - FEAT: Add `single_chapter_book_matching` option to `Reference` to change how single-chapter books are handled
