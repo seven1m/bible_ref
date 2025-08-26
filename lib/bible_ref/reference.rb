@@ -13,8 +13,8 @@ module BibleRef
       @reference = reference
       @single_chapter_book_matching = single_chapter_book_matching
       raise 'expected :special or :indifferent' unless %i[special indifferent].include?(@single_chapter_book_matching)
-      standardize_reference
       @details = parse
+      standardize_single_chapter_book
     end
 
     # Returns an array of pairs, each one being the from and to for a range.
@@ -25,9 +25,13 @@ module BibleRef
     def ranges
       return nil unless valid?
       @chapter = nil
-      [@details[:refs]].flatten.map do |ref|
+      refs_as_array.map do |ref|
         normalize_range(ref) || normalize_ref(ref)
       end
+    end
+
+    def refs_as_array
+      [@details[:refs]].flatten
     end
 
     # Returns a USFX-compatible book id, or nil if book is unknown.
@@ -77,20 +81,19 @@ module BibleRef
       end
     end
 
-    def standardize_reference
-      standardize_single_chapter_book if @language.has_single_chapter?(@reference)
-    end
-
     def standardize_single_chapter_book
       return if @single_chapter_book_matching == :indifferent
       return @reference if @reference.include? ':'
+      return unless %w[OBA PHM 2JN 3JN JUD].include?(book_id)
+      return if refs_as_array.any? { |r| r[:verse] }
 
       matches = @reference.match(/^([\d]?[\D\s]*)/)
-      return @reference if matches.length() == 0
+      #return @reference if matches.length() == 0
 
       book = matches[0].strip
       requested = @reference.sub(book, '').strip
       @reference = "#{book} 1:#{requested}"
+      @details = parse
     end
 
     def parse

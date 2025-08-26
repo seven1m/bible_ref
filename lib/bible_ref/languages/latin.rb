@@ -4,12 +4,6 @@ require_relative 'base'
 module BibleRef
   module Languages
     class Latin < Base
-      # Is it a single chapter book?
-      def has_single_chapter?(reference)
-        matches = ['Abdias', 'ad Philemonem', 'Joannis II', 'Joannis III', 'Judæ']
-        return matches.any? { |e| reference.include?(e)  }
-      end
-
       def books
         {
           'GEN' => { name: 'Genesis' },

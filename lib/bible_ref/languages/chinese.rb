@@ -4,13 +4,6 @@ require_relative 'base'
 module BibleRef
   module Languages
     class Chinese < Base
-
-      # Is it a single chapter book?
-      def has_single_chapter?(reference)
-          matches = [/^俄/, /^腓利門/, /^約翰貳/, /^約翰參/, /^猶/]
-          return Regexp.union(matches).match?(reference)
-      end
-
       def books
         {
           'GEN' => { match: /^創/, name: '創世紀'},

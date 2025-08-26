@@ -4,13 +4,6 @@ require_relative 'base'
 module BibleRef
   module Languages
     class Portuguese < Base
-
-      # Is it a single chapter book?
-      def has_single_chapter?(reference)
-          matches = [/^ob/, /^jud/, /^2 jo/, /^3 jo/, /^fil/]
-          return Regexp.union(matches).match?(reference.downcase)
-      end
-
       def books
         {
           'GEN' => { match: /^g[eê]n/,          name: 'Gênesis'           },
@@ -19,7 +12,7 @@ module BibleRef
           'NUM' => { match: /^n[uú]/,           name: 'Números'           },
           'DEU' => { match: /^de?ut/,           name: 'Deuteronômio'      },
           'JOS' => { match: /^jos/,             name: 'Josué'             },
-          'JDG' => { match: /^ju/,              name: 'Juízes'            },
+          'JDG' => { match: /^juí|^jz/,         name: 'Juízes'            },
           'RUT' => { match: /^ru/,              name: 'Rute'              },
           '1SA' => { match: /^1 sa?m/,          name: '1 Samuel'          },
           '2SA' => { match: /^2 sa?m/,          name: '2 Samuel'          },
@@ -62,7 +55,7 @@ module BibleRef
           '2CO' => { match: /^2 cor/,           name: '2 Coríntios'       },
           'GAL' => { match: /^g[aá]l/,          name: 'Gálatas'           },
           'EPH' => { match: /^ef[eé]/,          name: 'Efésios'           },
-          'PHP' => { match: /^fil/,             name: 'Filipenses'        },
+          'PHP' => { match: /^fp|^filip/,       name: 'Filipenses'        },
           'COL' => { match: /^col/,             name: 'Colossenses'       },
           '1TH' => { match: /^1 te?s/,          name: '1 Tessalonicenses' },
           '2TH' => { match: /^2 te?s/,          name: '2 Tessalonicenses' },

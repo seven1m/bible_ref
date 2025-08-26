@@ -4,12 +4,6 @@ require_relative 'base'
 module BibleRef
   module Languages
     class Russian < Base
-      # Is it a single chapter book?
-      def has_single_chapter?(reference)
-        matches = [/^авд(и[йя])?/, /^иуды?/, /^2 ?и(оа)?нн?а?/, /^3 ?и(оа)?нн?а?/, /^ф(лм|ил(имон)?у?)/]
-        return Regexp.union(matches).match?(reference.downcase)
-      end
-
       def books
         {
           'GEN' => { match: /^быт(и[её])?/,             name: 'Бытие'                 },  # Быт, Бытие
@@ -89,7 +83,7 @@ module BibleRef
           '1TI' => { match: /^1 ?тим(офею)?/,           name: '1 Тимофею'             },  # 1 Тим, 1 Тимофею
           '2TI' => { match: /^2 ?тим(офею)?/,           name: '2 Тимофею'             },  # 2 Тим, 2 Тимофею
           'TIT' => { match: /^титу?/,                   name: 'Титу'                  },  # Тит, Титу
-          'PHM' => { match: /^флм/,                     name: 'Филимону'              },  # Флм, Филимону
+          'PHM' => { match: /^флм|^Филим/,              name: 'Филимону'              },  # Флм, Филимону
           'HEB' => { match: /^евр(еям)?/,               name: 'Евреям'                },  # Евр, Евреям
           'JAS' => { match: /^иак(ова?)?/,              name: 'Иакова'                },  # Иак, Иаков, Иакова
           '1PE' => { match: /^1 ?пет(ра?)?/,            name: '1 Петра'               },  # 1 Пет, 1 Петра

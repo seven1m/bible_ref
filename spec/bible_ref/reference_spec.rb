@@ -10,10 +10,22 @@ describe BibleRef::Reference do
     end
 
     context 'given a single chapter book' do
-      subject { BibleRef::Reference.new('Philemon 8') }
+      BibleRef::LANGUAGES.each do |language_code, language_class|
+        language = language_class.new
 
-      it 'standardizes the reference' do
-        expect(subject.reference).to eq('Philemon 1:8')
+        context "in #{language_code}" do
+          books = language.books
+          %w[OBA PHM 2JN 3JN JUD].each do |book_id|
+            if (book_info = books[book_id])
+              book_name = book_info.fetch(:name)
+
+              it "standardizes the reference for #{book_id}" do
+                obj = BibleRef::Reference.new("#{book_name} 8", language: language_code)
+                expect(obj.reference).to eq("#{book_name} 1:8")
+              end
+            end
+          end
+        end
       end
     end
   end

@@ -5,11 +5,6 @@ module BibleRef
         fail NotImplementedError, "You must override #books in your language class."
       end
 
-      # Is it a single chapter book?
-      def has_single_chapter?(reference)
-        fail NotImplementedError, "You must override #has_single_chapter? in your language class."
-      end
-
       def book_id(book_name, canon)
         book_name = replace_roman_numerals(book_name)
         return book_name.upcase if books[book_name.upcase] # already normalized
@@ -17,9 +12,9 @@ module BibleRef
           details = books[book]
           next if details.nil?
           if (match = details[:match])
-            return book if book_name.downcase =~ match
+            return book if book_name.downcase =~ match || book_name =~ match
           else
-            return book if book_name.downcase == details[:name].downcase
+            return book if book_name.downcase == details[:name].downcase || book_name == details[:name]
           end
         end
         nil

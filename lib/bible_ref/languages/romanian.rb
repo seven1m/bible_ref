@@ -4,13 +4,6 @@ require_relative 'base'
 module BibleRef
   module Languages
     class Romanian < Base
-
-      # Is it a single chapter book?
-      def has_single_chapter?(reference)
-          matches = [/^ob/, /^iud/, /^2 io/, /^3 io/, /^fil/]
-          return Regexp.union(matches).match?(reference.downcase)
-      end
-
       def books
         {
           'GEN' => { match: /^gen/,             name: 'Geneza'                },
@@ -23,8 +16,8 @@ module BibleRef
           'RUT' => { match: /^ru/,              name: 'Rut'                   },
           '1SA' => { match: /^1 sa?m/,          name: '1 Samuel'              },
           '2SA' => { match: /^2 sa?m/,          name: '2 Samuel'              },
-          '1KI' => { match: /^1 [iîÎ]/,         name: '1 Împăraţi'            },
-          '2KI' => { match: /^2 [iîÎ]/,         name: '2 Împăraţi'            },
+          '1KI' => { match: /^1 [iîÎ]mp/,       name: '1 Împăraţi'            },
+          '2KI' => { match: /^2 [iîÎ]mp/,       name: '2 Împăraţi'            },
           '1CH' => { match: /^1 cr/,            name: '1 Cronici'             },
           '2CH' => { match: /^2 cr/,            name: '2 Cronici'             },
           'EZR' => { match: /^ezr/,             name: 'Ezra'                  },
@@ -34,7 +27,7 @@ module BibleRef
           'PSA' => { match: /^ps/,              name: 'Psalmii'               },
           'PRO' => { match: /^pr/,              name: 'Proverbe'              },
           'ECC' => { match: /^ecl/,             name: 'Eclesiastul'           },
-          'SNG' => { match: /^c[aâ]n$/,         name: 'Cântarea cântărilor'   },
+          'SNG' => { match: /^c[aâ]n/,          name: 'Cântarea cântărilor'   },
           'ISA' => { match: /^isa/,             name: 'Isaia'                 },
           'JER' => { match: /^ier/,             name: 'Ieremia'               },
           'LAM' => { match: /^plâ/,             name: 'Plângerile lui Ieremia'},
@@ -62,7 +55,7 @@ module BibleRef
           '2CO' => { match: /^2 cor/,           name: '2 Corinteni'           },
           'GAL' => { match: /^gal/,             name: 'Galateni'              },
           'EPH' => { match: /^ef/,              name: 'Efeseni'               },
-          'PHP' => { match: /^fil/,             name: 'Filipeni'              },
+          'PHP' => { match: /^flp|^filip/,      name: 'Filipeni'              },
           'COL' => { match: /^col/,             name: 'Coloseni'              },
           '1TH' => { match: /^1 te?s/,          name: '1 Tesaloniceni'        },
           '2TH' => { match: /^2 te?s/,          name: '2 Tesaloniceni'        },
@@ -76,7 +69,7 @@ module BibleRef
           '2PE' => { match: /^2 pet/,           name: '2 Petru'               },
           '1JN' => { match: /^1 io/,            name: '1 Ioan'                },
           '2JN' => { match: /^2 io/,            name: '2 Ioan'                },
-          '3JN' => { match: /^3 io/,            name: '1 Ioan'                },
+          '3JN' => { match: /^3 io/,            name: '3 Ioan'                },
           'JUD' => { match: /^iud/,             name: 'Iuda'                  },
           'REV' => { match: /^apo/,             name: 'Apocalipsa'            }
         }

@@ -5,12 +5,6 @@ require_relative 'base'
 module BibleRef
   module Languages
     class Czech < Base
-      # Is it a single chapter book?
-      def has_single_chapter?(reference)
-        matches = [/^ab/, /^(jud|juda)$/, /^2 ?jan/, /^3 ?jan/, /^fil/]
-        Regexp.union(matches).match?(reference.downcase)
-      end
-
       def books
         {
           'GEN' => { match: /^gen/,              name: 'Genesis'                },
@@ -21,12 +15,12 @@ module BibleRef
           'JOS' => { match: /^joz/,              name: 'Jozue'                  },
           'JDG' => { match: /^soud/,             name: 'Soudců'                 },
           'RUT' => { match: /^ru/,               name: 'Rút'                    },
-          '1SA' => { match: /^1 ?s(a?m)?/,       name: '1. Samuel'              },
-          '2SA' => { match: /^2 ?s(a?m)?/,       name: '2. Samuel'              },
-          '1KI' => { match: /^1 ?kr(a?l)?/,      name: '1. Královská'           },
-          '2KI' => { match: /^2 ?kr(a?l)?/,      name: '2. Královská'           },
-          '1CH' => { match: /^1 ?p(ar)?/,        name: '1. Paralipomenon'       },
-          '2CH' => { match: /^2 ?p(ar)?/,        name: '2. Paralipomenon'       },
+          '1SA' => { match: /^1\.? ?s(a?m)?/,    name: '1. Samuel'              },
+          '2SA' => { match: /^2\.? ?s(a?m)?/,    name: '2. Samuel'              },
+          '1KI' => { match: /^1\.? ?kr(a?l)?/,   name: '1. Královská'           },
+          '2KI' => { match: /^2\.? ?kr(a?l)?/,   name: '2. Královská'           },
+          '1CH' => { match: /^1\.? ?p(ar)?/,     name: '1. Paralipomenon'       },
+          '2CH' => { match: /^2\.? ?p(ar)?/,     name: '2. Paralipomenon'       },
           'EZR' => { match: /^ezr/,              name: 'Ezdráš'                 },
           'NEH' => { match: /^ne/,               name: 'Nehemiáš'               },
           'EST' => { match: /^est/,              name: 'Ester'                  },
@@ -58,25 +52,25 @@ module BibleRef
           'JHN' => { match: /^j(an|n)/,          name: 'Jan'                    },
           'ACT' => { match: /^sku/,              name: 'Skutky'                 },
           'ROM' => { match: /^rim/,              name: 'Římanům'                },
-          '1CO' => { match: /^1 ?kor/,           name: '1. Korintským'          },
-          '2CO' => { match: /^2 ?kor/,           name: '2. Korintským'          },
+          '1CO' => { match: /^1\.? ?kor/,        name: '1. Korintským'          },
+          '2CO' => { match: /^2\.? ?kor/,        name: '2. Korintským'          },
           'GAL' => { match: /^gal/,              name: 'Galatským'              },
           'EPH' => { match: /^ef/,               name: 'Efeským'                },
           'PHP' => { match: /^filip/,            name: 'Filipským'              },
           'COL' => { match: /^kol/,              name: 'Koloským'               },
-          '1TH' => { match: /^1 ?tes/,           name: '1. Tesalonickým'        },
-          '2TH' => { match: /^2 ?tes/,           name: '2. Tesalonickým'        },
-          '1TI' => { match: /^1 ?tim/,           name: '1. Timoteovi'           },
-          '2TI' => { match: /^2 ?tim/,           name: '2. Timoteovi'           },
+          '1TH' => { match: /^1\.? ?tes/,        name: '1. Tesalonickým'        },
+          '2TH' => { match: /^2\.? ?tes/,        name: '2. Tesalonickým'        },
+          '1TI' => { match: /^1\.? ?tim/,        name: '1. Timoteovi'           },
+          '2TI' => { match: /^2\.? ?tim/,        name: '2. Timoteovi'           },
           'TIT' => { match: /^tit/,              name: 'Titovi'                 },
           'PHM' => { match: /^fil/,              name: 'Filemonovi'             },
           'HEB' => { match: /^zid/,              name: 'Židům'                  },
           'JAS' => { match: /^jak/,              name: 'Jakub'                  },
-          '1PE' => { match: /^1 ?pet/,           name: '1. Petr'                },
-          '2PE' => { match: /^2 ?pet/,           name: '2. Petr'                },
-          '1JN' => { match: /^1 ?jan/,           name: '1. Jan'                 },
-          '2JN' => { match: /^2 ?jan/,           name: '2. Jan"'                },
-          '3JN' => { match: /^3 ?jan/,           name: '3. Jan'                 },
+          '1PE' => { match: /^1\.? ?pet/,        name: '1. Petr'                },
+          '2PE' => { match: /^2\.? ?pet/,        name: '2. Petr'                },
+          '1JN' => { match: /^1\.? ?jan/,        name: '1. Jan'                 },
+          '2JN' => { match: /^2\.? ?jan/,        name: '2. Jan'                 },
+          '3JN' => { match: /^3\.? ?jan/,        name: '3. Jan'                 },
           'JUD' => { match: /^(jud|juda)$/,      name: 'Juda'                   },
           'REV' => { match: /^zj(e)?/,           name: 'Zjevení'                }
         }
