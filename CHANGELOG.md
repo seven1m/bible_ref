@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.0.0 (2025-08-26)
+
+- FIX: A number of issues with regexp matching were fixed in the language files
+- FIX: Changed how we determine single-chapter books to be more reliable
+
 ## 1.9.1 (2025-08-25)
 
 - FIX: Chinese language typos
