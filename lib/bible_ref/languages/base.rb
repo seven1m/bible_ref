@@ -8,6 +8,7 @@ module BibleRef
       def book_id(book_name, canon)
         book_name = replace_roman_numerals(book_name)
         return book_name.upcase if books[book_name.upcase] # already normalized
+
         canon.books.each do |book|
           details = books[book]
           next if details.nil?

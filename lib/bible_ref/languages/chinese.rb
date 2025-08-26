@@ -20,7 +20,7 @@ module BibleRef
           '2KI' => { match: /紀下$/, name: '列王紀下'},
           '1CH' => { match: /志上$/, name: '歷代志上'},
           '2CH' => { match: /志下$/, name: '歷代志下'},
-          'EZR' => { match: /^以斯/, name: '以斯拉記'},
+          'EZR' => { match: /^以斯拉/, name: '以斯拉記'},
           'NEH' => { match: /^尼/, name: '尼希米記'},
           'EST' => { match: /帖記$/, name: '以斯帖記'},
           'JOB' => { match: /^約伯/, name: '約伯記'},

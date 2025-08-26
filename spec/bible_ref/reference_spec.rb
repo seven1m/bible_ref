@@ -477,4 +477,24 @@ describe BibleRef::Reference do
     end
   end
 
+  describe 'regexp matching in languages' do
+    BibleRef::LANGUAGES.each do |language_code, language_class|
+      language = language_class.new
+      books = language.books
+
+      context "in #{language_code}" do
+        BibleRef::Canons::Protestant.new.books.each do |book_id|
+          if (book_info = books[book_id])
+            book_name = book_info.fetch(:name)
+
+            it "matches the expected regexp for #{book_name} (#{book_id})" do
+              # if you get a failure here, then your language file regexps are too greedy or just wrong
+              obj = BibleRef::Reference.new("#{book_name} 1:1", language: language_code)
+              expect(obj.book_id).to eq(book_id)
+            end
+          end
+        end
+      end
+    end
+  end
 end
